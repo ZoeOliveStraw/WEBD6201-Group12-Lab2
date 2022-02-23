@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit</title>
+    <!-- CSS Section -->
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="./Content/app.css">
+</head>
+<body>
+
+    <header></header>
+
+    <main class="container">
+        <h1>Edit Contact</h1>
+        <div class="row justify-content-lg-center g-3">
+          <form class="col-lg-6 col-md-10 col-sm-10">
+
+            <div class="input-group mb-3">
+              <span class="input-group-text">Full Name</span>
+              <input type="text" name="fullName" class="form-control" 
+              aria-label="Full Name" id="fullName" aria-describedby="Full Name Input">
+            </div>
+
+            <div class="input-group mb-3">
+              <span class="input-group-text">Email Address</span>
+              <input type="email" name="emailAddress" class="form-control" 
+              aria-label="Email Address" id="emailAddress" aria-describedby="emailHelp">
+            </div>
+
+            <div class="input-group mb-3">
+              <span class="input-group-text">Contact Number</span>
+              <input type="tel" name="contactNumber" class="form-control" 
+              aria-label="Contact Number" id="contactNumber" aria-describedby="Contact Number">
+            </div>
+
+            <button name="editButton" id="editButton" type="submit" class="btn btn-primary">Edit</button>
+            <button name="cancelButton" id="cancelButton" type="reset" class="btn btn-warning">Cancel</button>
+          </form>
+        </div>
+    </main>
+
+    <!--Scripting section-->
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="./Scripts/namespace.js"></script>
+    <script src="./Scripts/contact.js"></script>
+    <script src="./Scripts/app.js"></script>
+</body>
+</html>
