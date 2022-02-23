@@ -5,43 +5,44 @@
         // TODO: missing Getters and Setters
 
         // constructor
-        constructor(displayName = "", emailAddress = "", username ="", password = "")
+        constructor(firstName = "", lastName ="", emailAddress = "", password = "")
         {
-            this.DisplayName = displayName;
+            this.FirstName = firstName;
+            this.LastName = lastName;
             this.EmailAddress = emailAddress;
-            this.Username = username;
             this.Password = password;
         }
 
         // overriden methods
         toString()
         {
-            return `Display Name : ${this.DisplayName}\nEmail Address : ${this.EmailAddress}\nUsername : ${this.Username}`;
+            return `Name : ${this.FirstName} ${this.LastName}\nEmail Address : ${this.EmailAddress}`;
         }
 
         // utility methods
         toJSON()
         {
             return {
-                "DisplayName": this.DisplayName,
+                "FirstName": this.FirstName,
+                "LastName": this.LastName,
                 "EmailAddress": this.EmailAddress,
-                "Username": this.Username
+                "Password": this.Password
             }
         }
 
         fromJSON(data)
         {
-            this.DisplayName = data.DisplayName;
+            this.FirstName = data.FirstName;
+            this.LastName = data.LastName;
             this.EmailAddress = data.EmailAddress;
-            this.Username = data.Username;
             this.Password = data.Password;
         }
 
         serialize()
         {
-            if(this.DisplayName !== "" && this.EmailAddress !== "" && this.Username !== "")
+            if(this.FirstName !== "" && this.LastName !== "" && this.EmailAddress !== "" && this.Password !== "")
             {
-                return `${this.DisplayName},${this.EmailAddress},${this.Username}`;
+                return `${this.FirstName},${this.LastName},${this.EmailAddress},${this.Password}`;
             }
             console.error("One or more properties of the User Object are missing or invalid");
             return null;
@@ -55,7 +56,5 @@
             this.Username = propertyArray[2];
         }
     }
-
     core.User = User;
-
 })(core || (core={}));

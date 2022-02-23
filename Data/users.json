@@ -2,22 +2,28 @@
     "users":
     [
         {
-            "DisplayName": "John Smith",
-            "EmailAddress":"john.smith@smith.net",
-            "UserName": "jsmith",
-            "Password": "123456"
+            "FirstName": "John",
+            "LastName": "Smith",
+            "EmailAddress": "john.smith@email.net",
+            "Password": "Banana55"
         },
         {
-            "DisplayName": "Batman",
-            "EmailAddress": "batman@example.com",
-            "Username": "bman",
-            "Password": "123456"
+            "FirstName": "Jane",
+            "LastName": "Smoth",
+            "EmailAddress": "jane.smoth@email.net",
+            "Password": "Pineapple25"
         },
         {
-            "DisplayName": "Admin",
-            "EmailAddress": "admin@example.com",
-            "Username": "admin",
-            "Password": "123456"
+            "FirstName": "Bruce",
+            "LastName": "Wayne",
+            "EmailAddress": "bman@batcave.net",
+            "Password": "Nightstalker55"
+        },
+        {
+            "FirstName": "Amy",
+            "LastName": "Shaftoe",
+            "EmailAddress": "america_shaftoe@cryptonomicon.net",
+            "Password": "Nightstalker55"
         }
     ]
 }
