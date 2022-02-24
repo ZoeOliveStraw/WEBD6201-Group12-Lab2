@@ -5,10 +5,11 @@
         // TODO: missing Getters and Setters
 
         // constructor
-        constructor(firstName = "", lastName ="", emailAddress = "", password = "")
+        constructor(firstName = "", lastName ="",username ="",  emailAddress = "", password = "")
         {
             this.FirstName = firstName;
             this.LastName = lastName;
+            this.Username = username;
             this.EmailAddress = emailAddress;
             this.Password = password;
         }
@@ -16,7 +17,7 @@
         // overriden methods
         toString()
         {
-            return `Name : ${this.FirstName} ${this.LastName}\nEmail Address : ${this.EmailAddress}`;
+            return `Name : ${this.FirstName} ${this.LastName}\nUsername: ${this.Username}\nEmail Address : ${this.EmailAddress}`;
         }
 
         // utility methods
@@ -25,6 +26,7 @@
             return {
                 "FirstName": this.FirstName,
                 "LastName": this.LastName,
+                "Username":this.Username,
                 "EmailAddress": this.EmailAddress,
                 "Password": this.Password
             }
@@ -34,6 +36,7 @@
         {
             this.FirstName = data.FirstName;
             this.LastName = data.LastName;
+            this.Username = data.Username;
             this.EmailAddress = data.EmailAddress;
             this.Password = data.Password;
         }

@@ -129,6 +129,7 @@ function AddContact(fullName, contactNumber, emailAddress)
 
     function ValidateContactForm()
     {
+        let _regex = new core.Regex();
         ValidateField("fullName", /^([A-Z][a-z]{1,3}.?\s)?([A-Z][a-z]{1,})+([\s,-]([A-Z][a-z]{1,}))*$/,"Incorrect full name");
         ValidateField("emailAddress", /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,10}$/, "Invalid email address");
         ValidateField("contactNumber", /^(\+\d{1,3}[\s-.])?\(?\d{3}\)?[\s-.]?\d{3}[\s-.]?\d{4}$/, "Incorrect Contact Number");

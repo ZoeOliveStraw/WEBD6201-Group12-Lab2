@@ -4,24 +4,28 @@
         {
             "FirstName": "John",
             "LastName": "Smith",
+            "Username": "jsmith",
             "EmailAddress": "john.smith@email.net",
             "Password": "Banana55"
         },
         {
             "FirstName": "Jane",
             "LastName": "Smoth",
+            "Username": "janesmith",
             "EmailAddress": "jane.smoth@email.net",
             "Password": "Pineapple25"
         },
         {
             "FirstName": "Bruce",
             "LastName": "Wayne",
+            "Username": "bwayne",
             "EmailAddress": "bman@batcave.net",
             "Password": "Nightstalker55"
         },
         {
             "FirstName": "Amy",
             "LastName": "Shaftoe",
+            "Username": "america",
             "EmailAddress": "america_shaftoe@cryptonomicon.net",
             "Password": "Nightstalker55"
         }
