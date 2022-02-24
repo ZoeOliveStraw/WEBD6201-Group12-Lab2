@@ -429,6 +429,7 @@ function AddContact(fullName, contactNumber, emailAddress)
      */
     function DisplayRegisterPage()
     {
+        $("#contentArea").prepend(`<div id="ErrorMessage">SAMPLE ERROR MESSAGE</div>`);
         ValidateRegisterForm();
         
         $("#submitButton").on("click", function()
@@ -448,16 +449,17 @@ function AddContact(fullName, contactNumber, emailAddress)
      */
      function ValidateRegistrationField(input_field_ID, regular_expression, error_message)
      {
-         let errorMessage = $("#ErrorMessage").hide();
+         let errorMessage = $("#ErrorMessage");
          
          $("#" + input_field_ID).on("blur", function()
          {
              let inputFieldText = $(this).val();
- 
+
              if(!regular_expression.test(inputFieldText))
              {
-                 $(this).trigger("focus"); 
+                 $(this).trigger("focus");
                  $(this).trigger("select"); 
+                 console.log("Thingy go zoom zoom");
                  errorMessage.show().addClass("alert alert-danger").text(error_message);
              }
              else
@@ -470,7 +472,7 @@ function AddContact(fullName, contactNumber, emailAddress)
      function ValidateRegisterForm()
      {
          ValidateRegistrationField("firstName", /([A-Z][a-z]{1,})/,"Incorrect first name");
-         ValidateRegistrationField("lastName", /([A-Z][a-z]{1,})/, "Invalid last address");
+         ValidateRegistrationField("lastName", /([A-Z][a-z]{1,})/, "Invalid last name");
          ValidateRegistrationField("userName", /([A-Z][a-z]{1,})/, "Incorrect username");
          ValidateRegistrationField("emailAddress", /([A-Z][a-z]{1,})/, "Incorrect email address");
          ValidateRegistrationField("password", /^[\S]{6,}$/, "Incorrect Password");
