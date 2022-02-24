@@ -1,3 +1,65 @@
+class User
+{
+    // TODO: missing Getters and Setters
+
+    // constructor
+    constructor(firstName = "", lastName ="",username ="",  emailAddress = "", password = "")
+    {
+        this.FirstName = firstName;
+        this.LastName = lastName;
+        this.Username = username;
+        this.EmailAddress = emailAddress;
+        this.Password = password;
+    }
+
+    // overriden methods
+    toString()
+    {
+        return `Name : ${this.FirstName} ${this.LastName}\nUsername: ${this.Username}\nEmail Address : ${this.EmailAddress}`;
+    }
+
+    // utility methods
+    toJSON()
+    {
+        return {
+            "FirstName": this.FirstName,
+            "LastName": this.LastName,
+            "Username":this.Username,
+            "EmailAddress": this.EmailAddress,
+            "Password": this.Password
+        }
+    }
+
+    fromJSON(data)
+    {
+        this.FirstName = data.FirstName;
+        this.LastName = data.LastName;
+        this.Username = data.Username;
+        this.EmailAddress = data.EmailAddress;
+        this.Password = data.Password;
+    }
+
+    serialize()
+    {
+        if(this.FirstName !== "" && this.LastName !== "" && this.Username !== "" && this.EmailAddress !== "" && this.Password !== "")
+        {
+            return `${this.FirstName},${this.LastName},${this.Username},${this.EmailAddress}`;
+        }
+        console.error("One or more properties of the User Object are missing or invalid");
+        return null;
+    }
+
+    deserialize(data) // assume that data is in a comma-separated format (string array of properties)
+    {
+        let propertyArray = data.split(",");
+        this.FirstName = propertyArray[0];
+        this.LastName = propertyArray[1];
+        this.Username = propertyArray[2];
+        this.EmailAddress = propertyArray[3];
+        this.Username = propertyArray[4];
+    }
+}
+
 //IIFE -- Immediately invoked function express
 //AKA anonymous self-executing function
 "use script";
@@ -362,10 +424,57 @@ function AddContact(fullName, contactNumber, emailAddress)
         }
     }
 
+    /**
+     * Displays the registration page and validates it for the user
+     */
     function DisplayRegisterPage()
     {
-        console.log("Register Page");
+        ValidateRegisterForm();
+        
+        $("#submitButton").on("click", function()
+        {
+            console.log("DONE DONE DONE");
+            let newUser = new User(firstName.value,lastName.value,userName.value,emailAddress.value,password.value);
+            console.log(newUser.toString() + "Created");
+        });
     }
+
+    /**
+     * This method validates an input text field in the registration form and displays an error in the message area
+     * 
+     * @param {string} input_field_ID
+     * @param {RegExp} regular_expression 
+     * @param {string} error_message 
+     */
+     function ValidateRegistrationField(input_field_ID, regular_expression, error_message)
+     {
+         let errorMessage = $("#ErrorMessage").hide();
+         
+         $("#" + input_field_ID).on("blur", function()
+         {
+             let inputFieldText = $(this).val();
+ 
+             if(!regular_expression.test(inputFieldText))
+             {
+                 $(this).trigger("focus"); 
+                 $(this).trigger("select"); 
+                 errorMessage.show().addClass("alert alert-danger").text(error_message);
+             }
+             else
+             {
+                 errorMessage.removeAttr("class").hide();
+             }
+         });
+     }
+ 
+     function ValidateRegisterForm()
+     {
+         ValidateRegistrationField("firstName", /([A-Z][a-z]{1,})/,"Incorrect first name");
+         ValidateRegistrationField("lastName", /([A-Z][a-z]{1,})/, "Invalid last address");
+         ValidateRegistrationField("userName", /([A-Z][a-z]{1,})/, "Incorrect username");
+         ValidateRegistrationField("emailAddress", /([A-Z][a-z]{1,})/, "Incorrect email address");
+         ValidateRegistrationField("password", /^[\S]{6,}$/, "Incorrect Password");
+     }
 
     //named function
     function Start()

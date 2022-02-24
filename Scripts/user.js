@@ -43,9 +43,9 @@
 
         serialize()
         {
-            if(this.FirstName !== "" && this.LastName !== "" && this.EmailAddress !== "" && this.Password !== "")
+            if(this.FirstName !== "" && this.LastName !== "" && this.Username !== "" && this.EmailAddress !== "" && this.Password !== "")
             {
-                return `${this.FirstName},${this.LastName},${this.EmailAddress},${this.Password}`;
+                return `${this.FirstName},${this.LastName},${this.Username},${this.EmailAddress}`;
             }
             console.error("One or more properties of the User Object are missing or invalid");
             return null;
@@ -54,9 +54,11 @@
         deserialize(data) // assume that data is in a comma-separated format (string array of properties)
         {
             let propertyArray = data.split(",");
-            this.DisplayName = propertyArray[0];
-            this.EmailAddress = propertyArray[1];
+            this.FirstName = propertyArray[0];
+            this.LastName = propertyArray[1];
             this.Username = propertyArray[2];
+            this.EmailAddress = propertyArray[3];
+            this.Username = propertyArray[4];
         }
     }
     core.User = User;
