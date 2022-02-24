@@ -355,6 +355,10 @@ function AddContact(fullName, contactNumber, emailAddress)
 
                 location.href = "login.html";
             })
+            //Grab a reference to the current user's name and inject it into the navbar between Contact and Logout
+            let userName = sessionStorage.getItem("user").split(',')[0];
+            let contactListNavbarItem = $("a:contains('Contact Us')").parent();
+            contactListNavbarItem.after(`<li class="navbar-text"><a>${userName}</a></li>`);
         }
     }
 
