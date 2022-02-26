@@ -418,7 +418,8 @@ function AddContact(fullName, contactNumber, emailAddress)
                 location.href = "login.html";
             })
             //Grab a reference to the current user's name and inject it into the navbar between Contact and Logout
-            let userName = sessionStorage.getItem("user").split(',')[0];
+            // Changed Navbar to show username instead of name
+            let userName = sessionStorage.getItem("user").split(',')[2];
             let contactListNavbarItem = $("a:contains('Contact Us')").parent();
             contactListNavbarItem.after(`<li class="navbar-text"><a>${userName}</a></li>`);
         }
@@ -449,7 +450,8 @@ function AddContact(fullName, contactNumber, emailAddress)
      */
      function ValidateRegistrationField(input_field_ID, regular_expression, error_message)
      {
-         let errorMessage = $("#ErrorMessage");
+         // Added hiding on default
+         let errorMessage = $("#ErrorMessage").hide();
          
          $("#" + input_field_ID).on("blur", function()
          {
@@ -471,11 +473,14 @@ function AddContact(fullName, contactNumber, emailAddress)
  
      function ValidateRegisterForm()
      {
-         ValidateRegistrationField("firstName", /([A-Z][a-z]{1,})/,"Incorrect first name");
+         //TODO: SETUP REGEX FOR EMAIL AND CONFIRM PASSWORD
+         // CHECK THAT PASSWORD AND CONFIRM PASSWORD ARE THE SAME
+         ValidateRegistrationField("firstName", /([A-Z][a-z]{1,})/,"Invalid first name");
          ValidateRegistrationField("lastName", /([A-Z][a-z]{1,})/, "Invalid last name");
-         ValidateRegistrationField("userName", /([A-Z][a-z]{1,})/, "Incorrect username");
-         ValidateRegistrationField("emailAddress", /([A-Z][a-z]{1,})/, "Incorrect email address");
-         ValidateRegistrationField("password", /^[\S]{6,}$/, "Incorrect Password");
+         ValidateRegistrationField("userName", /([A-Z][a-z]{1,})/, "Invalid username");
+         ValidateRegistrationField("emailAddress", /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,10}$/, "Invalid email address");
+         ValidateRegistrationField("password", /^[\S]{6,}$/, "Invalid Password");
+         ValidateRegistrationField("confirmPassword", /^[\S]{6,}$/, "Invalid Password");
      }
 
     //named function

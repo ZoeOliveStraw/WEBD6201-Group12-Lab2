@@ -28,6 +28,13 @@
             "Username": "america",
             "EmailAddress": "america_shaftoe@cryptonomicon.net",
             "Password": "Nightstalker55"
+        },
+        {
+            "FirstName": "Ad",
+            "LastName": "Min",
+            "Username": "admin",
+            "EmailAddress": "admin@email.com",
+            "Password": "123456"
         }
     ]
 }
