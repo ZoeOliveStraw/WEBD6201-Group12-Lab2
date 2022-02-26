@@ -447,14 +447,12 @@ function AddContact(fullName, contactNumber, emailAddress)
             // Set userName as just first + last name since we don't have a field for it
             userName = firstName.value + lastName.value;
 
-            if (comparePasswords())
-            {
-                // Create a new user
-                let newUser = new User(firstName.value, lastName.value, userName, emailAddress.value, password.value);
-                console.log(newUser.toString() + "\nCreated");
-                // Clear the form
-                document.getElementById("registerForm").reset();
-            }
+            // Create a user object
+            let newUser = new User(firstName.value, lastName.value, userName, emailAddress.value, password.value);
+            console.log(newUser.toString() + "\nCreated");
+            
+            // Clear the form
+            document.getElementById("registerForm").reset();
             
         });
     }
@@ -509,10 +507,15 @@ function AddContact(fullName, contactNumber, emailAddress)
                 
              }
 
+             // Check if all the fields are filled out to enable the submit button
              checkRegister();
          });
      }
  
+     /**
+      * Validates all fields in the registration form
+      *
+      */
      function ValidateRegisterForm()
      {
          ValidateRegistrationField("firstName", /([A-Z][a-z]{1,})/,"Invalid first name");
