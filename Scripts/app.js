@@ -430,14 +430,32 @@ function AddContact(fullName, contactNumber, emailAddress)
      */
     function DisplayRegisterPage()
     {
+        // Setup the error message field
         $("#contentArea").prepend(`<div id="ErrorMessage">SAMPLE ERROR MESSAGE</div>`);
         ValidateRegisterForm();
+
+        // Disable the register button until valid
+        document.getElementById("submitButton").disabled = true;
         
-        $("#submitButton").on("click", function()
+        $("#submitButton").on("click", function(event)
         {
-            console.log("DONE DONE DONE");
-            let newUser = new User(firstName.value,lastName.value,userName.value,emailAddress.value,password.value);
-            console.log(newUser.toString() + "Created");
+            // Prevent the default functioning
+            event.preventDefault();
+
+            // console.log("Submitted Register");
+
+            // Set userName as just first + last name since we don't have a field for it
+            userName = firstName.value + lastName.value;
+
+            if (comparePasswords())
+            {
+                // Create a new user
+                let newUser = new User(firstName.value, lastName.value, userName, emailAddress.value, password.value);
+                console.log(newUser.toString() + "\nCreated");
+                // Clear the form
+                document.getElementById("registerForm").reset();
+            }
+            
         });
     }
 
@@ -451,6 +469,7 @@ function AddContact(fullName, contactNumber, emailAddress)
      function ValidateRegistrationField(input_field_ID, regular_expression, error_message)
      {
 
+        // Used for email validation
         MIN_EMAIL_LENGTH = 8;
         
          // Added hiding on default
@@ -465,8 +484,11 @@ function AddContact(fullName, contactNumber, emailAddress)
              {
                  $(this).trigger("focus");
                  $(this).trigger("select"); 
-                 console.log("Thingy go zoom zoom");
+
+                //  console.log("Called field validation");
+
                  errorMessage.show().addClass("alert alert-danger").text(error_message);
+                 document.getElementById("submitButton").disabled = true;
              }
              else
              {
@@ -475,29 +497,76 @@ function AddContact(fullName, contactNumber, emailAddress)
                 {
                     $(this).trigger("focus");
                     $(this).trigger("select"); 
-                    console.log("Thingy go zoom zoom");
+                    // console.log("Thingy go zoom zoom");
                     errorMessage.show().addClass("alert alert-danger").text(error_message + ", minimum length of " + MIN_EMAIL_LENGTH);
+                    document.getElementById("submitButton").disabled = true;
                 }
                 else
                 {
-                    // Hide the error message sicne there are no errors
+                    // Hide the error message since there are no errors
                     errorMessage.removeAttr("class").hide();
                 }
                 
              }
+
+             checkRegister();
          });
      }
  
      function ValidateRegisterForm()
      {
-         //TODO: SETUP REGEX FOR EMAIL AND CONFIRM PASSWORD
-         // CHECK THAT PASSWORD AND CONFIRM PASSWORD ARE THE SAME
          ValidateRegistrationField("firstName", /([A-Z][a-z]{1,})/,"Invalid first name");
          ValidateRegistrationField("lastName", /([A-Z][a-z]{1,})/, "Invalid last name");
          ValidateRegistrationField("userName", /([A-Z][a-z]{1,})/, "Invalid username");
          ValidateRegistrationField("emailAddress", /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,10}$/, "Invalid email address");
-         ValidateRegistrationField("password", /^[\S]{6,}$/, "Invalid Password");
-         ValidateRegistrationField("confirmPassword", /^[\S]{6,}$/, "Invalid Password");
+         ValidateRegistrationField("password", /^[\S]{6,}$/, "Invalid Password, at least 6 characters required");
+         ValidateRegistrationField("confirmPassword", /^[\S]{6,}$/, "Invalid Password");         
+     }
+
+     /**
+      * Checks if the passwords in the registration form match
+      *
+      * @return {boolean} true for match, false for no match
+      */
+     function comparePasswords()
+     {
+
+        let errorMessage = $("#ErrorMessage").hide();
+
+        // console.log("Called comparePasswords")
+        if (password.value != confirmPassword.value)
+        {
+            errorMessage.show().addClass("alert alert-danger").text("Error: Passwords do not match");
+            document.getElementById("submitButton").disabled = true;
+            return false;
+        }
+        else
+        {
+            document.getElementById("submitButton").disabled = false;
+            return true;
+        }
+     }
+
+     /**
+      * Disables or enables the register form button whether all fields are filled
+      *
+      */
+     function checkRegister()
+     {
+        // console.log("Checking blank fields");
+        if(firstName.value == "" || lastName.value == "" || emailAddress.value == "" || password.value == "" || confirmPassword.value == "")
+        {
+           document.getElementById("submitButton").disabled = true;
+        }
+        else
+        {
+        //    console.log("All fields filled.");
+           if(comparePasswords())
+           {
+                document.getElementById("submitButton").disabled = false;
+           }
+           
+        }
      }
 
     //named function
