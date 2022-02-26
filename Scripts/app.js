@@ -450,6 +450,9 @@ function AddContact(fullName, contactNumber, emailAddress)
      */
      function ValidateRegistrationField(input_field_ID, regular_expression, error_message)
      {
+
+        MIN_EMAIL_LENGTH = 8;
+        
          // Added hiding on default
          let errorMessage = $("#ErrorMessage").hide();
          
@@ -457,6 +460,7 @@ function AddContact(fullName, contactNumber, emailAddress)
          {
              let inputFieldText = $(this).val();
 
+             // Check the field with regex
              if(!regular_expression.test(inputFieldText))
              {
                  $(this).trigger("focus");
@@ -466,7 +470,20 @@ function AddContact(fullName, contactNumber, emailAddress)
              }
              else
              {
-                 errorMessage.removeAttr("class").hide();
+                 // Additional length check for email
+                if(input_field_ID == "emailAddress" && inputFieldText.length < MIN_EMAIL_LENGTH)
+                {
+                    $(this).trigger("focus");
+                    $(this).trigger("select"); 
+                    console.log("Thingy go zoom zoom");
+                    errorMessage.show().addClass("alert alert-danger").text(error_message + ", minimum length of " + MIN_EMAIL_LENGTH);
+                }
+                else
+                {
+                    // Hide the error message sicne there are no errors
+                    errorMessage.removeAttr("class").hide();
+                }
+                
              }
          });
      }
